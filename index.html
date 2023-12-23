@@ -22,7 +22,7 @@ function refresh() {
 			else point--
 			points.push(point)
 		}
-		series.push({type: 'line', data: points})
+		series.push({type: 'line', showSymbol: false, data: points})
 	}
 	echart.setOption({xAxis: {type: 'category'}, yAxis: {type: 'value'}, series})
 }
