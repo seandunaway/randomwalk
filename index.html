@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<style>
+#div_echart {height: 100vh; width: 100vw;}
+#div_input {position: fixed; bottom: 0;}
+</style>
+<script src='https://cdn.jsdelivr.net/npm/echarts'></script>
+<script type='module'>
+let div_echart = document.getElementById('div_echart')
+let input_series = document.getElementById('input_series')
+let input_points = document.getElementById('input_points')
+let echart = echarts.init(div_echart)
+function refresh() {
+	echart.clear()
+	let series = []
+	for (let i = 1; i <= parseInt(input_series.value); i++) {
+		let points = []
+		let point = 0
+		points.push(point)
+		for (let j = 1; j <= parseInt(input_points.value); j++) {
+			let coinflip = Math.random() < 0.5
+			if (coinflip) point++
+			else point--
+			points.push(point)
+		}
+		series.push({type: 'line', data: points})
+	}
+	echart.setOption({xAxis: {type: 'category'}, yAxis: {type: 'value'}, series})
+}
+addEventListener('resize', echart.resize)
+input_series.addEventListener('input', refresh)
+input_points.addEventListener('input', refresh)
+refresh()
+</script>
+<div id='div_echart'></div>
+<div id='div_input'>
+	<input id='input_series' type='range' min='1' max='100' value='100'>
+	<input id='input_points' type='range' min='10' max='1000' value='1000'>
+</div>
