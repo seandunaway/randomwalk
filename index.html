@@ -7,6 +7,7 @@ body {margin: 0;}
 <script src='https://cdn.jsdelivr.net/npm/echarts'></script>
 <script type='module'>
 let div_echart = document.getElementById('div_echart')
+let input_refresh = document.getElementById('input_refresh')
 let input_series = document.getElementById('input_series')
 let input_points = document.getElementById('input_points')
 let echart = echarts.init(div_echart)
@@ -28,12 +29,14 @@ function refresh() {
 	echart.setOption({xAxis: {type: 'category'}, yAxis: {type: 'value'}, series})
 }
 addEventListener('resize', echart.resize)
+input_refresh.addEventListener('click', refresh)
 input_series.addEventListener('input', refresh)
 input_points.addEventListener('input', refresh)
 refresh()
 </script>
 <div id='div_echart'></div>
 <div id='div_input'>
+	<input id='input_refresh' type='button' value='refresh'>
 	<input id='input_series' type='range' min='1' max='100' value='100'>
 	<input id='input_points' type='range' min='10' max='1000' value='1000'>
 </div>
